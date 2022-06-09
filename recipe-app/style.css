@@ -41,6 +41,7 @@ header input {
   border-radius: 3px;
   border: none;
   background-color: #eee;
+  font-family: inherit;
 }
 header button {
   background-color: transparent;
@@ -127,6 +128,6 @@ header button {
   cursor: pointer;
 }
 
-.meal-body .fav-btn.active {
-  color: rebeccapurple;
+.meal-body .fav-btn .active {
+  color: rgb(155, 92, 218);
 }

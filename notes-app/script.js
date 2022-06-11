@@ -1,18 +1,70 @@
-const editBtn = document.querySelector('.edit');
-const deleteBtn = document.querySelector('.delete');
+const addBtn = document.getElementById('addNote');
 
-const notesEle = document.querySelector('.notes');
+const notes = JSON.parse(localStorage.getItem('notes'));
 
-const main = notesEle.querySelector('.main');
-const textArea = notesEle.querySelector('textarea');
+if (notes) {
+  notes.forEach((note) => {
+    addNewNote(note);
+  });
+}
 
-editBtn.addEventListener('click', () => {
-  main.classList.toggle('hidden');
-  textArea.classList.toggle('hidden');
+addBtn.addEventListener('click', () => {
+  addNewNote();
 });
 
-textArea.addEventListener('input', (e) => {
-  const { value } = e.target;
+function addNewNote(text = '') {
+  const note = document.createElement('div');
+  note.classList.add('note');
 
-  main.innerHTML = marked.parse(value);
-});
+  note.innerHTML = `
+  <div class="tools">
+    <button class="edit"><i class="fa-solid fa-pen-to-square"></i></button>
+    <button class="delete"><i class="fa-solid fa-trash"></i></button>
+  </div>
+  <div class="main hidden"></div>
+  <textarea > </textarea>
+  </div>
+  `;
+  const editBtn = note.querySelector('.edit');
+  const deleteBtn = note.querySelector('.delete');
+
+  //   const note = note.querySelector('.notes');
+
+  const main = note.querySelector('.main');
+  const textArea = note.querySelector('textarea');
+
+  textArea.value = text;
+  main.innerHTML = marked.parse(text);
+
+  editBtn.addEventListener('click', () => {
+    main.classList.toggle('hidden');
+    textArea.classList.toggle('hidden');
+  });
+
+  deleteBtn.addEventListener('click', () => {
+    note.remove();
+    console.log('clicked delete button');
+    updateLS();
+  });
+
+  textArea.addEventListener('input', (e) => {
+    const { value } = e.target;
+
+    main.innerHTML = marked.parse(value);
+
+    updateLS();
+  });
+
+  document.body.appendChild(note);
+}
+
+function updateLS() {
+  const notesText = document.querySelectorAll('textarea');
+
+  const notes = [];
+  notesText.forEach((note) => {
+    notes.push(note.value);
+  });
+  console.log(notes);
+  localStorage.setItem('notes', JSON.stringify(notes));
+}

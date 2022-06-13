@@ -2,6 +2,7 @@ const form = document.getElementById('form');
 const input = document.getElementById('input');
 const todos = document.getElementById('todos');
 
+// ! didnt implement local storage
 // var storedTodos = JSON.parse(localStorage.getItem('todos'));
 
 // if (storedTodos) {

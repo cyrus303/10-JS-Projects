@@ -7,15 +7,18 @@ async function getUser(username) {
   const resp = await fetch(APIURL + username);
   const respData = await resp.json();
 
-  // console.log(respData);
-
-  const RepoResp = await fetch(APIURL + `${username}/repos`);
-  const RepoRespData = await RepoResp.json();
-  console.log(RepoRespData);
-  createUserCard(respData, RepoRespData);
+  createUserCard(respData);
+  getRepos(username);
 }
 
-function createUserCard(username, RepoRespData) {
+async function getRepos(username) {
+  const RepoResp = await fetch(APIURL + username + '/repos');
+  const RepoRespData = await RepoResp.json();
+
+  addReposToCard(RepoRespData);
+}
+
+function createUserCard(username) {
   if (username.name) {
     var cardHTML = `
     <div class="container">
@@ -36,23 +39,9 @@ function createUserCard(username, RepoRespData) {
         <li>${username.followers} <strong>followers</strong></li>
         <li>${username.following} <strong>following</strong></li>
       </ul>
+      <div class='repos' id='repos'></div>
     </div>
-    </div>
-
-
-`;
-    {
-      /* <div class='repo-container'>
-    
-<ul class="repos" id="repos">
-<li>${RepoRespData.name}</li>
-<li>python</li>
-<li>mongoDB</li>
-<li>sql</li>
-
-</ul>
-</div> */
-    }
+    </div>`;
   } else {
     cardHTML = `
       <div class="invalid-user">
@@ -62,6 +51,21 @@ function createUserCard(username, RepoRespData) {
   }
 
   main.innerHTML = cardHTML;
+}
+
+function addReposToCard(repos) {
+  const reposEl = document.getElementById('repos');
+  console.log(repos);
+  repos.slice(0, 9).forEach((repo) => {
+    const repoEl = document.createElement('a');
+    repoEl.classList.add('repo');
+
+    repoEl.href = repo.html_url;
+    repoEl.target = '_blank';
+    repoEl.innerHTML = repo.name;
+
+    reposEl.appendChild(repoEl);
+  });
 }
 
 getUser('cyrus303');
@@ -77,22 +81,3 @@ form.addEventListener('submit', (e) => {
     search.value = '';
   }
 });
-
-// function createRepos(RepoRespData) {
-//   RepoRespData.forEach((repo) => {
-//     const repoDetails = document.createElement('div');
-//     repoDetails.classList.add('repo-container');
-
-//     repoDetails.innerHTML = `
-
-//     <ul class="repos" id="repos">
-//     <li>javascript</li>
-//     <li>python</li>
-//     <li>mongoDB</li>
-//     <li>sql</li>
-
-//   </ul>
-//   `;
-//     main.appendChild(repoDetails);
-//   });
-// }

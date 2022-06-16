@@ -1,1 +1,1 @@
-Depolyed at https://strong-cupcake-81e700.netlify.app/
+Depolyed at https://gregarious-mandazi-50f540.netlify.app/

@@ -10,15 +10,15 @@
   <body>
     <div class="pw-container">
       <div class="pw-header">
-        <div class="pw">
+        <div class="pw" id="pw">
           123*&^%$udsfb65401
-          <button>Copy</button>
+          <button id="copy">Copy</button>
         </div>
       </div>
       <div class="pw-body">
         <div class="form-control">
           <label for="len">Password Length</label>
-          <input id="len" type="number" min="4" max="15" />
+          <input id="len" type="number" min="4" max="15" value="12" />
         </div>
         <div class="form-control">
           <label for="upper">Contain Uppercase Letters</label>
@@ -36,6 +36,7 @@
           <label for="symbol">Contain Symbols</label>
           <input id="symbol" type="checkbox" />
         </div>
+        <button class="generate" id="generate">Generate</button>
       </div>
     </div>
     <script src="./script.js"></script>

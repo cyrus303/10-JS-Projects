@@ -15,11 +15,15 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
 
 .pw-container {
   background-color: #0b5351;
   width: 400px;
+  box-shadow: rgba(0, 0, 0, 0.6) 0px 19px 38px,
+    rgba(0, 0, 0, 0.44) 0px 15px 12px;
+  border-radius: 2px;
 }
 
 .pw-header {
@@ -27,7 +31,7 @@ body {
 }
 
 .pw-body {
-  padding: 1rem;
+  padding: 0 1rem 1rem;
 }
 
 .pw {
@@ -46,16 +50,41 @@ body {
   position: absolute;
   bottom: 0;
   right: 0;
-  /* left: 50%; */
-  transform: translate(-20%, 50%);
+  transform: translate(-30px, 15px);
   background-color: #00a9a5;
   padding: 0.5rem;
-  color: white;
+  color: #092327;
   border: none;
   opacity: 0;
-  transition: opacity 0.2s ease;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+
+  border-radius: 2px;
+  font-weight: bold;
 }
 
 .pw:hover button {
   opacity: 1;
+  transform: translate(-20%, 50%);
+}
+
+.form-control {
+  color: white;
+
+  display: flex;
+  justify-content: space-between;
+  margin: 0.75rem 0;
+}
+
+.generate {
+  display: block;
+  padding: 0.5rem;
+  margin-top: 1rem;
+  /* margin-bottom: 0.5rem; */
+  width: 100%;
+  font-weight: bold;
+  font-size: 1rem;
+  background-color: #00a9a5;
+  border: none;
+  border-radius: 2px;
+  color: #092327;
 }
